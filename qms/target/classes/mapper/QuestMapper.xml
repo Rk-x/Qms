@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rk.app.mapper.QuestMapper">
+
+
+<!--分页查询-->
+    <select id="splictlist" resultType="question">
+        select *
+        from question q
+        left join users u on q.uid = u.uid
+        left join tags t on q.tid = t.tid
+        left join answer a on q.aid=a.aid
+        <where>
+            <if test="name!=null and name!=''">
+                q.title like '%${name}%'
+            </if>
+            and q.del=0
+        </where>
+        limit #{page},#{size}
+    </select>
+
+<!--查询总记录数-->
+    <select id="countlist" resultType="java.lang.Integer">
+        select count(*)
+        from question q
+        left join users u on q.uid = u.uid
+        left join tags t on q.tid = t.tid
+        left join answer a on q.aid=a.aid
+        <where>
+            <if test="name!=null and name!=''">
+                q.title like '%${name}%'
+            </if>
+            and q.del=0
+        </where>
+    </select>
+
+    <insert id="save" >
+        insert into question(uid, tid,title, content, ctime)
+        value(#{uid},#{tid},#{title},#{content},now())
+    </insert>
+
+    <update id="update">
+        update question set tid=#{tid},title=#{title},content=#{content},mtime=now()
+        where qid=#{qid}
+    </update>
+
+    <!--逻辑删除 修改del为1-->
+    <update id="remove">
+        update  question set del=1
+        where qid in
+        <foreach collection="list" item="qid"  open="(" close=")" separator=",">
+            #{qid}
+        </foreach>
+    </update>
+
+
+
+</mapper>
