@@ -35,7 +35,7 @@
 
     <sql id="commsql">
         SELECT *
-        FROM ROLES R
+        FROM roles r
                  LEFT JOIN tb_role_per pr ON r.rid = pr.rid
                  LEFT JOIN permissions p ON pr.pid = p.pid
     </sql>
