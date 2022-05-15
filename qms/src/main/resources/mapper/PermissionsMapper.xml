@@ -6,6 +6,7 @@
     <insert id="save">
         insert into tb_role_per(pid, rid) value (#{pid},#{rid})
     </insert>
+
     <delete id="removePermissions">
         delete from tb_role_per where rid=#{rid}
     </delete>

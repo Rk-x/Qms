@@ -23,10 +23,10 @@ public class PermissionsServiceImpl implements PermissionsService {
     @Override
     public int savePermissions(List<Integer> pids, int rid) {
         Roles roles = rolesDao.get(rid);
-    /*    int size = roles.getPermissionsList().size();
+        int size = roles.getPermissionsList().size();
         if (size > 0) {
             return -1;
-        }*/
+        }
         int count = 0;
         for (Integer pid : pids) {
             count = permissionsDao.save(pid, rid);

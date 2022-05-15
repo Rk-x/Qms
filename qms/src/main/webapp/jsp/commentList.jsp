@@ -16,7 +16,10 @@
                 if(comment==null){
                     $.messager.alert('我的消息','请选择要删除的评论','error');
                 }else{
-                    $.post('../comment/removeComment',{"cid":comment.cid},function (flag) {
+                    $.post('../comment/removeComment',{"cid":comment.cid},
+                        function (flag) {
+                        console.log(flag);
+                        console.log(typeof flag);
                         if(flag){
                             $("#dg").datagrid('reload');
                             $.messager.show({
@@ -25,6 +28,8 @@
                                 timeout:500,
                                 showType:'slide'
                             });
+                        }else {
+                            $.messager.alert('我的消息','删除失败，只能删除自己的评论！','info');
                         }
                     })
                 }
@@ -66,7 +71,7 @@
             </td>
         </tr>
     </table>
-    <shiro:hasAnyRoles name="0">
+    <shiro:hasAnyRoles name="0,1">
     <a href="#" id="btn-remove" class="easyui-linkbutton"
        plain="true" iconCls="icon-remove">删除评论</a>
     </shiro:hasAnyRoles>

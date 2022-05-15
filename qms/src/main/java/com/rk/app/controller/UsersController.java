@@ -55,17 +55,19 @@ public class UsersController {
      * 更改用户状态
      * @return
      */
+    @SystemControllerLog(description = "更改用户状态")
     @RequestMapping("/changeUserStat")
     public boolean changeUserStat(int uid){
         return usersService.changeUserStat(uid) > 0 ? true : false;
     }
 
+    @SystemControllerLog(description = "分页查询用户")
     @RequestMapping("/listUsers")
     public Map<String,Object> listUsers(Integer page, Integer rows,String c){
         Map<String,Object> map=new HashMap<>();
         Users user =(Users)SecurityUtils.getSubject().getSession().getAttribute("user");
 
-        //获取角色权限
+        //获取角色权限 如果是普通用户
         if(user.getList().get(0).getRname().equals("1")){
             map.put("total", usersService.countlist(c,user.getUname()));
             map.put("rows", usersService.splictlist(page, rows, c,user.getUname(),user.getUid()));
@@ -79,11 +81,11 @@ public class UsersController {
     }
 
 
+    @SystemControllerLog(description = "添加用户")
     @RequestMapping("/saveUsers")
     public Boolean saveUsers(@RequestParam(value = "avatar",required = false) MultipartFile avatar, HttpServletRequest request) {
         Users user = new Users();
-
-        String imageName= StrUtils.getComplexRandomString(5);
+        String imageName= StrUtils.getComplexRandomString(10);
 
         //文件上传
         Boolean flag=QiNiuUtil.uploadMultipartFile(avatar,imageName,true);
@@ -111,17 +113,20 @@ public class UsersController {
         return usersService.save(user);
     }
 
+    @SystemControllerLog(description = "删除用户")
     @RequestMapping("/removeUsers")
     public Boolean removeUsers(@RequestParam("uids[]") List<Integer> uid){
         return usersService.remove(uid);
     }
 
+
+    @SystemControllerLog(description = "修改用户")
     @RequestMapping("/updateUsers")
     public Boolean updateUsers(@RequestParam(value = "avatar",required = false) MultipartFile avatar, HttpServletRequest request){
         Users user = new Users();
 
         if(avatar.getSize()==0){
-            //说明没有修改头像
+            //说明没有修改头像  文件大小为0
             user.setAvatar(null);
         }else {//修改了头像就上传
             //图片名称

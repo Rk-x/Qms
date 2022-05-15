@@ -12,11 +12,12 @@
     <select id="splictlist" resultType="answer">
         SELECT * FROM answer a LEFT JOIN question q
         ON a.qid=q.qid
-        left join users u on q.uid=u.uid
+        left join users u on a.uid=u.uid
         <where>
             <if test="name!=null and name!=''">
                 a.ctime like '%${name}%'
             </if>
+            and a.del=0
         </where>
         limit #{page},#{size}
     </select>
@@ -36,6 +37,10 @@
         update  answer set del=1
         where aid=#{id}
     </update>
+
+    <select id="findbyid" resultType="answer">
+        select * from answer where aid=#{id}
+    </select>
 
 
 </mapper>

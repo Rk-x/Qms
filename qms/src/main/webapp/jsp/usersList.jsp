@@ -288,26 +288,26 @@
 <body>
 <table id="dg"></table>
 <div id="tb">
-<shiro:hasAnyRoles name="0">
-    <a href="#" id="btn-add" class="easyui-linkbutton"
-       plain="true" iconCls="icon-add">添加用户</a>
-</shiro:hasAnyRoles>
-<shiro:hasAnyRoles name="0,1">
-    <a href="#" id="btn-edit" class="easyui-linkbutton"
-       plain="true" iconCls="icon-edit">修改用户</a>
-</shiro:hasAnyRoles>
-<shiro:hasAnyRoles name="0">
-    <a href="#" id="btn-remove" class="easyui-linkbutton"
-       plain="true" iconCls="icon-remove">删除用户</a>
-</shiro:hasAnyRoles>
-<shiro:hasAnyRoles name="0">
-    <a href="#" id="btn-stat" class="easyui-linkbutton"
-       plain="true" iconCls="icon-lock">更改状态</a>
-</shiro:hasAnyRoles>
-    <shiro:hasAnyRoles name="0">
+    <shiro:hasPermission name="S1">
+        <a href="#" id="btn-add" class="easyui-linkbutton"
+           plain="true" iconCls="icon-add">添加用户</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="S2">
+        <a href="#" id="btn-edit" class="easyui-linkbutton"
+           plain="true" iconCls="icon-edit">修改用户</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="S3">
+        <a href="#" id="btn-remove" class="easyui-linkbutton"
+           plain="true" iconCls="icon-remove">删除用户</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="S5">
+        <a href="#" id="btn-stat" class="easyui-linkbutton"
+           plain="true" iconCls="icon-lock">更改状态</a>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="S4">
         <a href="#" id="btn-role" class="easyui-linkbutton"
            plain="true" iconCls="icon-man">角色分配</a>
-    </shiro:hasAnyRoles>
+    </shiro:hasPermission>
 </div>
 <%--添加对话框--%>
 <div id="add-dialog" class="easyui-dialog" title="添加用户信息" style="width:auto;height:auto"

@@ -17,6 +17,9 @@ public class Tags implements Serializable {
     private String ctime;
     //修改时间
     private String mtime;
+
+    private String name;//统计显示数据使用
+    private String value;//统计显示数据使用
 }
 
 

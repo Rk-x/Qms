@@ -1,6 +1,7 @@
 package com.rk.app.controller;
 import com.rk.app.aop.SystemControllerLog;
 import com.rk.app.bean.Answer;
+import com.rk.app.bean.Question;
 import com.rk.app.bean.Users;
 import com.rk.app.service.AnswerService;
 import org.apache.shiro.SecurityUtils;
@@ -32,6 +33,13 @@ public class AnswerController {
     @SystemControllerLog(description = "删除问题回复")
     @RequestMapping("/removeAnswer")
     public boolean removeAnswer(@RequestParam("aid") Integer aid){
+        Users user =(Users)SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer uid = user.getUid();;
+        if(user.getList().get(0).getRname().equals("1")) {//如果是普通用户登录  只能删除自己的回复
+            Answer answer = answerService.findbyid(aid);
+            if(uid!=answer.getUid())//不是自己的问题就不能删除
+                return false;
+        }
         return answerService.removebyid(aid);
     }
 

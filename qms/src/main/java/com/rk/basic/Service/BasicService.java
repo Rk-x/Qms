@@ -70,4 +70,11 @@ public interface BasicService<T> {
      * @return
      */
     boolean remove(List<Integer> tids);
+
+    /**
+     * 根据id查询数据
+     * @param id
+     * @return
+     */
+    T findbyid(Integer id);
 }

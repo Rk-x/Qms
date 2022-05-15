@@ -26,4 +26,7 @@ public class Logs implements Serializable {
     private String methods;
     //操作描述
     private String ddesc;
+
+    //访问次数
+    private Integer times;//统计访问次数
 }

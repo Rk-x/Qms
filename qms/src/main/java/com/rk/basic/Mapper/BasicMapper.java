@@ -61,4 +61,12 @@ public interface BasicMapper<T> {
      * @return
      */
     int removebyid(Integer id);
+
+
+    /**
+     * 根据id查询数据
+     * @param id
+     * @return
+     */
+    T findbyid(Integer id);
 }

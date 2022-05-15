@@ -80,4 +80,10 @@ public class TagesController {
     }
 
 
+    @RequestMapping("/countTimesTags")
+    public List<Tags> countTimesTags(){
+        return tagsService.countTimesTags();
+    }
+
+
 }

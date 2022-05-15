@@ -18,8 +18,8 @@
                 } else {
                     $.post('../answer/removeAnswer', {"aid": answer.aid},
                         function (flag) {
-                        console.debug(flag);
-                        console.debug(typeof flag);
+                        console.log(flag);
+                        console.log(typeof flag);
                         if (flag) {
                             $("#dg").datagrid('reload');
                             $.messager.show({
@@ -29,7 +29,7 @@
                                 showType: 'slide'
                             });
                         }else {
-                            alert("删除失败!");
+                            $.messager.alert('我的消息','删除失败，只能删除自己的回复！','info');
                         }
                     })
                 }
@@ -107,7 +107,7 @@
             </td>
         </tr>
     </table>
-<shiro:hasAnyRoles name="0">
+<shiro:hasAnyRoles name="0,1">
     <a href="#" id="btn-remove" class="easyui-linkbutton" plain="true" iconCls="icon-remove">删除评论</a>
 </shiro:hasAnyRoles>
 </div>

@@ -50,9 +50,9 @@
                                             });
                                             $("#edit-dialog").dialog({closed: true});
                                         }else{
-                                            $("#edit-form").form('clear');
-                                            $("#edit-form").dialog({closed: true});//关闭窗口
-                                            $.messager.alert('我的消息','修改失败！','info');
+                                            $("#edit-dialog").form('clear');
+                                            $.messager.alert('我的消息','修改失败，只能修改自己的问题！','info');
+                                            $("#edit-dialog").dialog({closed: true});//关闭窗口
                                         }
                                     }
                                 })
@@ -94,7 +94,7 @@
                             });
                             $("#dg").datagrid('reload');
                         }else {
-                            $.messager.alert('我的消息','添加失败！','info');
+                            $.messager.alert('我的消息','删除失败，只能删除自己的问题！','info');
                         }
                     })
 
@@ -236,11 +236,11 @@
     </table>
     <a id="btn-add" href="#" plain="true" class="easyui-linkbutton"
        iconCls="icon-add">添加问题</a>
-<shiro:hasAnyRoles name="0">
+<shiro:hasAnyRoles name="0,1">
     <a id="btn-edit" href="#" class="easyui-linkbutton"
        iconCls="icon-edit" plain="true">修改提问题</a>
 </shiro:hasAnyRoles>
-<shiro:hasAnyRoles name="0">
+<shiro:hasAnyRoles name="0,1">
     <a id="btn-remove" href="#" plain="true" class="easyui-linkbutton"
        iconCls="icon-remove">删除提问</a>
 </shiro:hasAnyRoles>

@@ -15,6 +15,7 @@
                     opername:$("#opername").val()
                 })
             })
+
             $('#dg').datagrid({
                 url: '../logs/listLogs',
                 fit: true,

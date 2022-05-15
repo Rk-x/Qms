@@ -56,6 +56,13 @@ public class  QuestController {
     @SystemControllerLog(description = "修改提问问题")
     @RequestMapping("/updateQuestion")
     public boolean updateQuestion(Question question){
+        Users user =(Users)SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer uid = user.getUid();;
+        if(user.getList().get(0).getRname().equals("1")) {//如果是普通用户登录  只能删除自己的问题
+          if(uid!=question.getUid()){//说明修改的不是自己的问题
+              return false;
+          }
+        }
         return questService.update(question);
     }
 
@@ -63,6 +70,16 @@ public class  QuestController {
     @SystemControllerLog(description = "删除提问问题")
     @RequestMapping("/removeQuestion")
     public boolean removeQuestion(@RequestParam("ids[]") List<Integer> qid){
+        Users user =(Users)SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer uid = user.getUid();;
+        if(user.getList().get(0).getRname().equals("1")) {//如果是普通用户登录  只能删除自己的问题
+            for (Integer integer : qid) {
+                Question question = (Question) questService.findbyid(integer);
+                if (question.getUid() != uid) {//删除的不是当前用户的问题会失败
+                    return false;
+                }
+            }
+        }
         return questService.remove(qid);
     }
 }

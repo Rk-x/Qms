@@ -39,4 +39,8 @@
         update comment set del=1,mtime=now()
         where cid=#{id}
     </update>
+
+    <select id="findbyid" resultType="comment">
+        select * from comment where cid=#{id}
+    </select>
 </mapper>

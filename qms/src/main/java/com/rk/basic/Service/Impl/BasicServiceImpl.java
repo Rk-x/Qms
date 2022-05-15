@@ -131,4 +131,15 @@ public class BasicServiceImpl<T> implements BasicService<T> {
             return false;//删除失败
         }
     }
+
+    /**
+     * 根据id查询数据
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public T findbyid(Integer id) {
+        return basicMapper.findbyid(id);
+    }
 }

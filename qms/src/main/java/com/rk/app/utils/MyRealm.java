@@ -1,4 +1,5 @@
 package com.rk.app.utils;
+import com.rk.app.bean.Permissions;
 import com.rk.app.bean.Roles;
 import com.rk.app.bean.Users;
 import com.rk.app.service.UsersService;
@@ -52,21 +53,24 @@ public class MyRealm extends AuthorizingRealm {
         Users users = login(uname);
         //SimpleAuthorizationInfo对象它会在前端结合shiro框架提供的jsp标签进行菜单的过滤
         SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+
         List<Roles> list = users.getList();//登录角色集合
         List<String> rolerNames=new ArrayList<>();
         for (Roles roles : list) {
             rolerNames.add(roles.getRname());
             info.addRoles(rolerNames);
         }
-        /*//所有的权限的名称
+
+        //所有的权限的名称
         List<String> perNames=new ArrayList<>();
         //该集合装载的是用于所有的权限
         List<Permissions> permissionsList = users.getPList();
         for (Permissions permissions : permissionsList) {
             perNames.add(permissions.getPname());
+            System.out.println("权限名称:"+permissions.getPname());
         }
         //将权限名称交给SimpleAuthorizationInfo对象
-        info.addStringPermissions(perNames);*/
+        info.addStringPermissions(perNames);
         return info;
     }
 

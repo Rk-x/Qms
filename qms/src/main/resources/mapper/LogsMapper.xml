@@ -31,6 +31,10 @@
         limit #{page},#{size}
     </select>
 
+    <select id="countTimes" resultType="com.rk.app.bean.Logs">
+        SELECT opername,count(opername) times FROM  logs
+        WHERE opername is not NULL GROUP BY opername
+    </select>
 
 
 </mapper>

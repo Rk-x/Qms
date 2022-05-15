@@ -42,4 +42,9 @@
             </if>
         </where>
     </select>
+
+    <select id="countTimesTags" resultType="com.rk.app.bean.Tags">
+        SELECT t.tname name,count(t.tname) as value
+        FROM tags t INNER JOIN question q on t.tid=q.tid GROUP BY  t.tname
+    </select>
 </mapper>

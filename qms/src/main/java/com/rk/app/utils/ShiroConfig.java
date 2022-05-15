@@ -33,6 +33,12 @@ public class ShiroConfig {
         map.put("/images/**","anon");
         map.put("/zhuxiao","logout");//注销自动清空session
         map.put("/**","authc");//只有认证之后才能访问
+    /*    map.put("/answer/**","authc");
+        map.put("/comment/**","authc");
+        map.put("/users/**","authc");
+        map.put("/permissions/**","authc");
+        map.put("/tags/**","authc");//roles
+        map.put("/roles/**","authc");*/
         filter.setFilterChainDefinitionMap(map);
         return filter;
 

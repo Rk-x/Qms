@@ -55,6 +55,12 @@
         </foreach>
     </update>
 
+    <select id="findbyid" resultType="question">
+        select * from question where qid=#{id}
+    </select>
+
+
+
 
 
 </mapper>

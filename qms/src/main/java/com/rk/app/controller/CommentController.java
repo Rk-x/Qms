@@ -1,5 +1,6 @@
 package com.rk.app.controller;
 import com.rk.app.aop.SystemControllerLog;
+import com.rk.app.bean.Answer;
 import com.rk.app.bean.Comment;
 import com.rk.app.bean.Users;
 import com.rk.app.service.CommentService;
@@ -21,6 +22,14 @@ public class CommentController {
     @SystemControllerLog(description = "删除评论")
     @RequestMapping("/removeComment")
     public Boolean removebyid(@RequestParam("cid") Integer cid){
+        Users user =(Users)SecurityUtils.getSubject().getSession().getAttribute("user");
+        Integer uid = user.getUid();;
+        if(user.getList().get(0).getRname().equals("1")) {//如果是普通用户登录  只能删除自己的回复
+            Comment comment = commentService.findbyid(cid);
+            if(uid!=comment.getUid())//不是自己的评论就不能删除
+                return false;
+        }
+
         return commentService.removebyid(cid);
     }
 
